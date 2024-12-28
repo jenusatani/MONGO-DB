@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
+</head>
+<style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #f8f9fa, #e0eafc);
+        color: #333;
+    }
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: white;
+        padding: 15px 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: background 0.3s ease;
+    }
+    
+    .navbar:hover {
+        background: linear-gradient(to right, #2575fc, #6a11cb);
+    }
+    
+    .navbar .logo {
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 3px;
+        animation: fadeIn 1s ease;
+    }
+    
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+    
+    .nav-links li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+    
+    .nav-links li a:hover {
+        color: #ffe53b;
+    }
+    
+    .nav-links li a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #ffe53b;
+        transition: width 0.3s ease;
+    }
+    
+    .nav-links li a:hover::after {
+        width: 100%;
+    }
+    h1 {
+        text-align: center;
+        font-size: 3rem;
+        color: #6a11cb;
+        margin-top: 30px;
+        animation: slideInDown 1s ease;
+    }
+    form {
+        margin: 20px auto;
+        max-width: 500px;
+        padding: 20px;
+        background: linear-gradient(to right, #ffffff, #e4e5f1);
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        animation: zoomIn 0.8s ease;
+    }
+    
+    form input, form button {
+        width: 1000%;
+        max-width: 470px;
+        padding: 12px;
+        margin: 10px 0;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    
+    form input:focus {
+        outline: none;
+        box-shadow: 0 0 10px #6a11cb;
+        transform: scale(1.05);
+    }
+    
+    form button {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    
+    form button:hover {
+        background: linear-gradient(to right, #2575fc, #6a11cb);
+        transform: scale(1.1);
+    }
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 30px;
+        animation: fadeIn 1.2s ease;
+    }
+    
+    .card {
+        background: linear-gradient(to right, #ffffff, #f0f2f5);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transform: translateY(0);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card-image img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 3px solid #6a11cb;
+    }
+    
+    .card-content {
+        padding: 20px;
+    }
+    
+    .card-content h3 {
+        font-size: 1.5rem;
+        margin: 0;
+        color: #6a11cb;
+    }
+    
+    .card-content p {
+        margin: 5px 0;
+        color: #555;
+    }
+    
+    .card-actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        background: #f8f9fa;
+        border-top: 1px solid #ddd;
+    }
+    
+    .card-actions a {
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        transition: transform 0.2s ease, background 0.3s ease;
+    }
+    
+    .edit-button {
+        background: #4caf50;
+    }
+    
+    .edit-button:hover {
+        background: #45a049;
+        transform: scale(1.1);
+    }
+    
+    .delete-button {
+        background: #f44336;
+    }
+    
+    .delete-button:hover {
+        background: #e53935;
+        transform: scale(1.1);
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideInDown {
+        from {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes zoomIn {
+        from {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: linear-gradient(145deg, #f9f9f9, #e0e0e0); 
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.7); 
+    overflow: hidden;
+    position: relative;
+    transform: scale(1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.card:hover {
+    transform: scale(1.05); 
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.2), -10px -10px 25px rgba(255, 255, 255, 0.9); 
+}
+
+.card-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid #6a11cb;
+}
+
+.card-content {
+    padding: 15px 20px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.card-content h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #6a11cb; 
+    animation: fadeIn 0.8s ease; 
+}
+
+.card-content p {
+    margin: 8px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: #f8f9fa; 
+    border-top: 1px solid #ddd;
+}
+
+.card-actions a {
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.edit-button {
+    background: #4caf50; 
+    color: white;
+}
+
+.edit-button:hover {
+    background: #45a049;
+    transform: scale(1.1);
+}
+
+.delete-button {
+    background: #f44336; 
+    color: white;
+}
+
+.delete-button:hover {
+    background: #e53935;
+    transform: scale(1.1);
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+<body>
+    <nav class="navbar">
+        <div class="logo">BOOK STORE</div>
+        <ul class="nav-links">
+          <li><a href="">Home</a></li>
+          <li><a href="">About</a></li>
+          <li><a href="">Categories</a></li>
+          <li><a href="">Blog</a></li>
+          <li><a href="">Contact</a></li>
+        </ul>
+    </nav>
+    <h1>Edit Book Details</h1>
+    <form action="/updatedata" method="post">
+        <input type="text" name="id" id="id" value="<%= singledata.id %>" hidden>
+        <input type="text" placeholder="Name" name="name" required value="<%= singledata.name %>">
+        <input type="text" placeholder="Author" name="Author" required value="<%= singledata.Author %>">
+        <input type="text" placeholder="Price" name="Price" required value="<%= singledata.Price %>">
+        <input type="date" placeholder="Published Date" name="Date" required value="<%= singledata.Date %>">
+        <input type="text" placeholder="Image URL" name="image" required value="<%= singledata.image %>">
+
+        <button type="submit">Update Data</button>
+    </form>
+</body>
+
+</html>
